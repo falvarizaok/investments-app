@@ -13,3 +13,6 @@ export const getSelectedInvestments = (state) =>
   fromInvestments.getSelectedInvestments(state.investments, state.risk);
 
 export const getCurrentRisk = (state) => state.risk
+
+export const getInvestmentsCount = (state) =>
+  fromInvestments.getInvestmentsCount(state.investments)

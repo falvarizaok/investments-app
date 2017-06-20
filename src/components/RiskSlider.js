@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentRisk } from '../reducers';
+import { getCurrentRisk, getInvestmentsCount } from '../reducers';
 import { changeRisk } from '../actions';
 
-const RiskSlider = ({ risk, onSlideChange }) => {
+const RiskSlider = ({ risk, investmentsCount, onSlideChange }) => {
   let input;
 
   return (
@@ -17,7 +17,7 @@ const RiskSlider = ({ risk, onSlideChange }) => {
         ref={node => { input = node; }}
         type="range"
         min="1"
-        max="10"
+        max={investmentsCount}
         step="1"
         value={risk}
         onChange={() => {
@@ -30,12 +30,14 @@ const RiskSlider = ({ risk, onSlideChange }) => {
 
 RiskSlider.propTypes = {
   risk: PropTypes.number.isRequired,
+  investmentsCount: PropTypes.number.isRequired,
   onSlideChange: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => (
   {
-    risk: getCurrentRisk(state)
+    risk: getCurrentRisk(state),
+    investmentsCount: getInvestmentsCount(state)
   }
 )
 

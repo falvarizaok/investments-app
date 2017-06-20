@@ -8,3 +8,11 @@ Install the dependencies and start the server.
 $ npm install
 $ npm start
 ```
+
+### Tests
+
+In order to run the test suite type in the console
+
+```sh
+$ npm test
+```

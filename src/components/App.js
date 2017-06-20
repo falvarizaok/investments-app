@@ -2,7 +2,6 @@ import React from 'react';
 import DonutChart from './DonutChart';
 import RiskSlider from './RiskSlider';
 import styled from 'styled-components';
-import '../styles/App.css';
 
 const AppContainer = styled.div`
   display: flex;

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Donut from 'react-donut-chart';
 import { getSelectedInvestments } from '../reducers';
+import { fetchInvestments } from '../actions';
+import '../styles/DonutChart.css';
 
 class EnhancedDonut extends Donut {
   /*
@@ -29,15 +31,22 @@ class EnhancedDonut extends Donut {
   }
 }
 
-const DonutChart = ({ investments }) => (
-  <EnhancedDonut data={investments} className='donut' />
-)
+class DonutChart extends Component {
+  componentWillMount() {
+    this.props.fetchInvestments();
+  }
+
+  render() {
+    return <EnhancedDonut data={this.props.investments} className='donut' />
+  }
+}
 
 DonutChart.propTypes = {
   investments: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired
-  })).isRequired
+  })).isRequired,
+  fetchInvestments: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => (
@@ -46,4 +55,13 @@ const mapStateToProps = (state, ownProps) => (
   }
 )
 
-export default connect(mapStateToProps)(DonutChart);
+const mapDispatchToProps = (dispatch) => (
+  {
+    fetchInvestments: () => dispatch(fetchInvestments())
+  }
+)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DonutChart);
